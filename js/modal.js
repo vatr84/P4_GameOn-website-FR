@@ -36,6 +36,8 @@ const quantityText = document.getElementById("quantityText");
 const locationText = document.getElementById("locationText");
 const conditionText = document.getElementById("conditionText");
 
+//
+const numbers = /^[0-9]+$/;
 
 //
 // launch modal event
@@ -127,7 +129,7 @@ quantity.addEventListener('change', function() {
 });
 
 const validQuantity = function() {
-  if(quantity.value === 0 || quantity.value < 0) {
+  if(!quantity.value.match(numbers)) {
     quantityText.innerHTML = "Merci d'indiquer le nombre de tournois";
     quantityText.classList.remove('text-succes');
     quantityText.classList.add('text-danger');
