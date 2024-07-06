@@ -106,7 +106,7 @@ birthdate.addEventListener('change', function() {
 
 const validBirthdate = function() {
 
-  if(! birthdate) {
+  if(!birthdate.value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
     birthdateText.innerHTML = "Veuillez entrer une date de naissance valide";
     birthdateText.classList.remove('text-succes');
     birthdateText.classList.add('text-danger');
@@ -136,13 +136,7 @@ const validQuantity = function() {
     quantity.classList.remove('border-succes');
     quantity.classList.add('border-danger');
     return false;
-  } else if(quantity.value > 50) {
-    quantityText.innerHTML = "Nous n'avons pas organisé autant de tournois !";
-    quantityText.classList.remove('text-succes');
-    quantityText.classList.add('text-danger');
-    quantity.classList.remove('border-succes');
-    quantity.classList.add('border-danger');
-    return false;
+  
   } else {
     quantityText.innerHTML = "Champs Valide";
     quantityText.classList.remove('text-danger');
@@ -216,17 +210,15 @@ function openRemerciments() {
 };
 
 function validate() {
-  if (generiqueValidate(firstName, regExTypeText, "firstname error", firstText, firstName)
-    && generiqueValidate(lastName, regExTypeText, "lastname error", lastText, lastName)
-    && generiqueValidate(email, regExTypeEmail, "email error", emailText, email)
+  if (generiqueValidate(firstName, regExTypeText, "Veuillez rentrer deux caractères minimum", firstText, firstName)
+    && generiqueValidate(lastName, regExTypeText, "Veuillez rentrer deux caractères minimum", lastText, lastName)
+    && generiqueValidate(email, regExTypeEmail, "Veuillez rentrer un adresse email valide", emailText, email)
     && validBirthdate(birthdate) 
     && validQuantity(quantity) 
     && validLocationTournament()
     && validCondition(condition)) {
       openRemerciments();
-    } else {
-      alert("Merci de remplir correctement votre inscription");
-    }
+    } 
   }
 
 // submit
