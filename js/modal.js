@@ -189,8 +189,7 @@ condition.addEventListener('change', function() {
   validCondition(this); 
 });
 
-// Vérifie si les conditions sont biens cochées ou non
-const validCondition = function() {
+const validCondition = function() {   // vérifier si les conditions sont cochées
   if(condition.checked == false ) {                  
     conditionText.innerHTML = "Merci d'accepter les conditions d'utilisations";
     conditionText.classList.remove('text-succes');
@@ -205,6 +204,11 @@ const validCondition = function() {
 };
 
 // validation
+form.noValidate = true;   // désactiver la validation automatique par le navigateur
+form.addEventListener('submit', (element) => {    // conserver les entrées de données du formulaire
+  element.preventDefault();
+})
+
 function openRemerciments() {
   form.style.display = "none";
   validForm.style.display = "flex";
