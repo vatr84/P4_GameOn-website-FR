@@ -84,17 +84,21 @@ function msgValide(label, border) {    //  Champ Valide
   return true;
 }
 
+function msgNonValide(msg, label, border) {   //  Champ Non Valide
+  label.innerHTML = msg;
+  label.classList.remove('text-succes');
+  label.classList.add('text-danger');
+  border.classList.remove('border-succes');
+  border.classList.add('border-danger');
+  return false;
+}
+
 function generiqueValidate(input,regEx,msg,label,border) {
   let testValid = regEx.test(input.value);
   if(testValid) {
     return msgValide(label, border);
    } else {
-    label.innerHTML = msg;
-    label.classList.remove('text-succes');
-    label.classList.add('text-danger');
-    border.classList.remove('border-succes');
-    border.classList.add('border-danger');
-    return false;
+    return msgNonValide(msg, label, border);
    }
 }
 
@@ -106,12 +110,7 @@ birthdate.addEventListener('change', function() {
 const validBirthdate = function() {
 
   if(!birthdate.value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
-    birthdateText.innerHTML = "Veuillez entrer une date de naissance valide";
-    birthdateText.classList.remove('text-succes');
-    birthdateText.classList.add('text-danger');
-    birthdate.classList.remove('border-succes');
-    birthdate.classList.add('border-danger');
-    return false;
+    return msgNonValide("Veuillez entrer une date de naissance valide", birthdateText, birthdate);
   } else {
     return msgValide(birthdateText, birthdate);
   }
@@ -124,13 +123,7 @@ quantity.addEventListener('change', function() {
 
 const validQuantity = function() {
   if(!quantity.value.match(numbers)) {
-    quantityText.innerHTML = "Merci d'indiquer le nombre de tournois";
-    quantityText.classList.remove('text-succes');
-    quantityText.classList.add('text-danger');
-    quantity.classList.remove('border-succes');
-    quantity.classList.add('border-danger');
-    return false;
-  
+    return msgNonValide("Veuillez indiquer le nombre de tournois", quantityText,quantity)
   } else {
     return msgValide(quantityText,quantity);
   }
@@ -155,7 +148,7 @@ locationTournament.forEach((checkedBoxInput) => checkedBoxInput.addEventListener
 
 function validLocationTournament() {
   if(! verifLocationTournament()) {
-      locationText.innerHTML = "Merci de cocher une ville";
+      locationText.innerHTML = "Veuillez de cocher une ville";
       locationText.classList.remove('text-succes');
       locationText.classList.add('text-danger');
       return false;
@@ -174,7 +167,7 @@ condition.addEventListener('change', function() {
 
 const validCondition = function() {   // vérifier si les conditions sont cochées
   if(condition.checked == false ) {                  
-    conditionText.innerHTML = "Merci d'accepter les conditions d'utilisations";
+    conditionText.innerHTML = "Veuillez accepter les conditions d'utilisations";
     conditionText.classList.remove('text-succes');
     conditionText.classList.add('text-danger');
     return false;
