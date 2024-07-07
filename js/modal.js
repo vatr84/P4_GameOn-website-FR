@@ -27,7 +27,7 @@ const validMessage = document.getElementById("validMessage");
 const btnSubmit = document.getElementById("btnSubmit");
 const btnValid = document.getElementById("btnValid");
 
-// Const 
+// Const Text
 const firstText = document.getElementById("firstText");
 const lastText = document.getElementById("lastText");
 const emailText = document.getElementById("emailText");
@@ -36,7 +36,7 @@ const quantityText = document.getElementById("quantityText");
 const locationText = document.getElementById("locationText");
 const conditionText = document.getElementById("conditionText");
 
-//
+//  Const
 const numbers = /^[0-9]+$/;
 
 //
@@ -47,11 +47,6 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   modalbg.style.display = "block";
 }
-
-// Hidemodal form
-function hideModal() {
-  modalbg.style.display = "none";
-};
 
 // Close modal form 
 modalBtnClose.addEventListener("click", function() {          
@@ -77,18 +72,22 @@ lastName.addEventListener('change', function() {
 });
 
 email.addEventListener('change', function() {
-  generiqueValidate(this,regExTypeEmail,"Veuillez rentrer un adresse email valide", emailText, this);
+  generiqueValidate(this,regExTypeEmail,"Veuillez rentrer une adresse email valide", emailText, this);
 });
+
+function msgValide(label, border) {    //  Champ Valide
+  label.innerHTML = "Champ Valide";
+  label.classList.remove('text-danger');
+  label.classList.add('text-succes');
+  border.classList.remove('border-danger');
+  border.classList.add('border-succes');
+  return true;
+}
 
 function generiqueValidate(input,regEx,msg,label,border) {
   let testValid = regEx.test(input.value);
   if(testValid) {
-    label.innerHTML = "Champs Valide";
-    label.classList.remove('text-danger');
-    label.classList.add('text-succes');
-    border.classList.remove('border-danger');
-    border.classList.add('border-succes');
-    return true;
+    return msgValide(label, border);
    } else {
     label.innerHTML = msg;
     label.classList.remove('text-succes');
@@ -114,12 +113,7 @@ const validBirthdate = function() {
     birthdate.classList.add('border-danger');
     return false;
   } else {
-    birthdateText.innerHTML = "Champs Valide";
-    birthdateText.classList.remove('text-danger');
-    birthdateText.classList.add('text-succes');
-    birthdate.classList.remove('border-danger');
-    birthdate.classList.add('border-succes');
-    return true;
+    return msgValide(birthdateText, birthdate);
   }
 };
 
@@ -138,12 +132,7 @@ const validQuantity = function() {
     return false;
   
   } else {
-    quantityText.innerHTML = "Champs Valide";
-    quantityText.classList.remove('text-danger');
-    quantityText.classList.add('text-succes');
-    quantity.classList.remove('border-danger');
-    quantity.classList.add('border-succes');
-    return true;
+    return msgValide(quantityText,quantity);
   }
 };
 
@@ -212,7 +201,7 @@ function openRemerciments() {
 function validate() {
   if (generiqueValidate(firstName, regExTypeText, "Veuillez rentrer deux caractères minimum", firstText, firstName)
     && generiqueValidate(lastName, regExTypeText, "Veuillez rentrer deux caractères minimum", lastText, lastName)
-    && generiqueValidate(email, regExTypeEmail, "Veuillez rentrer un adresse email valide", emailText, email)
+    && generiqueValidate(email, regExTypeEmail, "Veuillez rentrer une adresse email valide", emailText, email)
     && validBirthdate(birthdate) 
     && validQuantity(quantity) 
     && validLocationTournament()
