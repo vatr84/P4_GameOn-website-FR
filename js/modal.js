@@ -193,10 +193,10 @@ function validate() {   // Le formulaire doit être valide quand l'utilisateur c
   if (generiqueValidate(firstName, regExTypeText, "Veuillez rentrer deux caractères minimum", firstText, firstName)
     && generiqueValidate(lastName, regExTypeText, "Veuillez rentrer deux caractères minimum", lastText, lastName)
     && generiqueValidate(email, regExTypeEmail, "Veuillez rentrer une adresse email valide", emailText, email)
-    && validBirthdate(birthdate) 
-    && validQuantity(quantity) 
+    && validBirthdate() 
+    && validQuantity() 
     && validLocationTournament()
-    && validCondition(condition)) {
+    && validCondition()) {
       openConfirmation();
     } 
   }
