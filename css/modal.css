@@ -557,7 +557,7 @@ footer {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    /* margin-top: -15px; */  /*  la cause de décalage en version mobile   */
   }
   .hero-content {
     width: 100%;
